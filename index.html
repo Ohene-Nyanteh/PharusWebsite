@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,10 @@
         Pharus Daignostics App
     </title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="https://github.com/pocketbase/js-sdk/blob/master/dist/pocketbase.umd.js"></script>
+
 </head>
+
 <body>
     <header class="navbar">
         <img src="/Image/logo.jpg" class="log-small" />
@@ -26,17 +30,27 @@
         </div>
         <div class="img2">
             <h1 style="margin-bottom: 20px;">Pharus Diagnostics App</h1>
-            <a download="Pharus Daignostics App" href="/Image/tet.apk" class="downloadButton">Download</a>
+            <a onclick="handleUploads()" download="Pharus Daignostics App" href="/Image/tet.apk"
+                class="downloadButton">Download</a>
             <div>
                 <h3>About Us</h3>
                 <p>
-                    We are a innovative start-up company in the health technology <br> space, dedicated to using technology to solve some global health issues.
+                    We are a innovative start-up company in the health technology <br> space, dedicated to using
+                    technology to solve some global health issues.
                 </p>
             </div>
         </div>
 
         </div>
     </main>
+    <script>
+        const pb = new PocketBase("https://pocketbase-production-3281.up.railway.app/")
 
+        const handleUploads = async () => {
+            const record = await pb.collection('download_counts').getOne('nr3gutb6sztvqhx');
+            console.log(record.items.download_count)
+        }
+    </script>
 </body>
+
 </html>
